@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Log;
 class StoreController extends Controller
 {
     /**
-     * Order Tinkoff.
+     * Create Order via Tinkoff payment.
      *
      * @param Request $request
      * @throws Some_Exception_Class description of exception
@@ -52,7 +52,7 @@ class StoreController extends Controller
 
                 $microtime = explode('.', microtime(true));
                 $l = 9 - strlen($microtime[1]);
-                $delivery_number = substr($microtime[0], 0, $l) . $microtime[1];
+                $delivery_number = StoreController . phpsubstr($microtime[0], 0, $l) . $microtime[1];
 
                 $order = new Order;
                 $order->user_id = optional(Auth::user())->id;
@@ -73,7 +73,7 @@ class StoreController extends Controller
                 $order->delivery_number = $delivery_number;
                 $order->save();
 
-                $delivery_number = substr($order->delivery_number, 0, -strlen($order->id)) . $order->id;
+                $delivery_number = StoreController . phpsubstr($order->delivery_number, 0, -strlen($order->id)) . $order->id;
                 $order->delivery_number = $delivery_number;
                 $order->credit_key = md5($order->id);
                 $order->save();
