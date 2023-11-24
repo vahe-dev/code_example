@@ -11,6 +11,9 @@ use yii\db\Query;
 
 class OrdersController extends Controller
 {
+    /**
+     * Retrieves orders from Shopify API and sends email notifications for new orders.
+     */
     public function actionShopifyGetOrdersRu()
     {
         if (Yii::$app->request->get('token') == '************') {
@@ -120,27 +123,5 @@ class OrdersController extends Controller
             }
         }
     }
-
-
-
-
-
-
-
-
-
-    // добавление email подписчика
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
